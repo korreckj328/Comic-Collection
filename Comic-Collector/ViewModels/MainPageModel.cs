@@ -8,6 +8,16 @@ namespace ComicCollector.ViewModels
 {
     public class MainPageModel: BasePageModel
     {
+        private string _addButtonText = "+";
+        public string AddButtonText
+        {
+            get { return _addButtonText; }
+        }
+        private string _title = "Comic Collector";
+        public string Title
+        {
+            get { return _title; }
+        }
         private ObservableCollection<Comics> _collection
         {
             get

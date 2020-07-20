@@ -6,6 +6,34 @@
              xmlns:behaviors="clr-namespace:ComicCollector.Behaviors"
              xmlns:converters="clr-namespace:ComicCollector.Converters"
              mc:Ignorable="d" x:Class="ComicCollector.Views.MainPage">
+
+    <NavigationPage.TitleView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            
+            <Label Text="{Binding Title}"
+               FontSize="Title"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" 
+               Grid.Row="0"
+               Grid.Column="0"/>
+            <Button Text="{Binding AddButtonText}"
+                FontSize="Title"
+                HorizontalOptions="End"
+                VerticalOptions="Center"
+                Command="{Binding AddComicCommand}" 
+                Grid.Row="0"
+                Grid.Column="1"/>
+        </Grid>
+
+    </NavigationPage.TitleView>
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:SelectedItemEventArgsToSelectedItemConverter x:Key="SelectedItemConverter" />
