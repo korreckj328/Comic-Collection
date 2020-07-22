@@ -7,9 +7,54 @@
              x:Class="ComicCollector.Views.AddComicPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="{Binding ComicNameText}"
+                       HorizontalOptions="Center"
+                       FontSize="Default"
+                       Grid.Row="0"
+                       Grid.Column="0" />
+                <Label Text="{Binding ComicNumberText}"
+                       HorizontalOptions="Center"
+                       FontSize="Default"
+                       Grid.Row="1"
+                       Grid.Column="0" />
+                <Label Text="{Binding PublisherText}"
+                       HorizontalOptions="Center"
+                       FontSize="Default"
+                       Grid.Row="2"
+                       Grid.Column="0" />
+                <Label Text="{Binding PubDateText}"
+                       HorizontalOptions="Center"
+                       FontSize="Default"
+                       Grid.Row="3"
+                       Grid.Column="0" />
+
+                <Entry Text="{Binding ComicName}"
+                       Grid.Row="0"
+                       Grid.Column="1" />
+                <Entry Text="{Binding ComicNumber}"
+                       Grid.Row="1"
+                       Grid.Column="1" />
+                <Entry Text="{Binding Publisher}"
+                       Grid.Row="2"
+                       Grid.Column="1" />
+                <Entry Text="{Binding PubDate}"
+                       Grid.Row="3"
+                       Grid.Column="1" />
+            </Grid>
+            <Button Text="{Binding AddButtonText}"
+                    HorizontalOptions="End"
+                    Command="{Binding AddButtonCommand}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

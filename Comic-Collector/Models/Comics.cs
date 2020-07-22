@@ -9,7 +9,7 @@ namespace ComicCollector.Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         public string Name { get; set; }
-        public uint Number { get; set; }
+        public string Number { get; set; }
         public string Publisher { get; set; }
         public DateTime PubDate { get; set; }
     }

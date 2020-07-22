@@ -3,30 +3,41 @@ using ComicCollector.Models;
 using Xamvvm;
 using System.Collections.ObjectModel;
 using Comic_Collector;
+using System.Windows.Input;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ComicCollector.ViewModels
 {
     public class MainPageModel: BasePageModel
     {
-        private string _addButtonText = "+";
-        public string AddButtonText
+        public ICommand ComicTapped { private set; get; }
+
+        private async Task comicTapped(Comics comic)
         {
-            get { return _addButtonText; }
+            var pageToPush = this.GetPageFromCache<ComicDetailPageModel>();
+            await this.PushPageAsync(pageToPush, (pm) => pm.Init(comic));
         }
-        private string _title = "Comic Collector";
-        public string Title
+        public ICommand AddComicCommand { private set; get; }
+
+        private async Task addComicAsync()
         {
-            get { return _title; }
-        }
-        private ObservableCollection<Comics> _collection
-        {
-            get
-            {
-                return new ObservableCollection<Comics>(App.Database.GetComics());
-            }
+            var pageToPush = this.GetPageFromCache<AddComicPageModel>();
+            await this.PushPageAsync(pageToPush);
         }
 
-        public ObservableCollection<Comics> Collection
+        public string AddButtonText
+        {
+            get { return GetField<string>(); }
+            set { SetField(value); }
+        }
+        
+        public string Title
+        {
+            get { return GetField<string>(); }
+            set { SetField(value); }
+        }
+        private ObservableCollection<Comics> _collection
         {
             get
             {
@@ -34,12 +45,28 @@ namespace ComicCollector.ViewModels
             }
             set
             {
-                SetField(value);
+                _collection = value;
             }
+        }
+
+        public ObservableCollection<Comics> Collection
+        {
+            get { return GetField<ObservableCollection<Comics>>(); }
+            set { SetField(value); }
+        }
+
+        public void UpdateProperties()
+        {
+            Collection = new ObservableCollection<Comics>(App.Database.GetComics());
         }
 
         public MainPageModel()
         {
+            ComicTapped = new Command<Comics>((c) => comicTapped(c));
+            AddComicCommand = new Command(() => addComicAsync());
+            AddButtonText = "+";
+            Title = "Comic Collector";
+            Collection = new ObservableCollection<Comics>(App.Database.GetComics());
         }
     }
 }

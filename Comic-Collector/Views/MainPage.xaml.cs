@@ -13,5 +13,16 @@ namespace ComicCollector.Views
         {
             InitializeComponent();
         }
+
+        MainPageModel _vm
+        {
+            get { return BindingContext as MainPageModel; }
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            _vm.UpdateProperties();
+        }
     }
 }
